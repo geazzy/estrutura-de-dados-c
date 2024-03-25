@@ -2,25 +2,25 @@
 
 #define MAX_SIZE 3
 
-// Definição da estrutura para a matriz
+
 struct Matriz {
     int dimensao;
     int elementos[MAX_SIZE][MAX_SIZE];
 };
 
-// Função para calcular o determinante de uma matriz 2x2
+
 int determinante2x2(int a, int b, int c, int d) {
     return a * d - b * c;
 }
 
-// Função para calcular o determinante de uma matriz 3x3
+
 int determinante3x3(int matriz[3][3]) {
     return matriz[0][0] * determinante2x2(matriz[1][1], matriz[1][2], matriz[2][1], matriz[2][2]) -
            matriz[0][1] * determinante2x2(matriz[1][0], matriz[1][2], matriz[2][0], matriz[2][2]) +
            matriz[0][2] * determinante2x2(matriz[1][0], matriz[1][1], matriz[2][0], matriz[2][1]);
 }
 
-// Função para calcular o cofator de um elemento da matriz
+
 int cofator(struct Matriz m, int linha, int coluna) {
     int submatriz[MAX_SIZE - 1][MAX_SIZE - 1];
     int submatriz_i = 0, submatriz_j = 0;
@@ -48,7 +48,7 @@ int cofator(struct Matriz m, int linha, int coluna) {
         return determinante3x3(submatriz);
 }
 
-// Função para calcular a matriz adjunta
+
 void matrizAdjunta(struct Matriz m, int adjunta[MAX_SIZE][MAX_SIZE]) {
     for (int i = 0; i < m.dimensao; i++) {
         for (int j = 0; j < m.dimensao; j++) {
@@ -57,7 +57,7 @@ void matrizAdjunta(struct Matriz m, int adjunta[MAX_SIZE][MAX_SIZE]) {
     }
 }
 
-// Função para imprimir uma matriz
+
 void imprimirMatriz(int matriz[MAX_SIZE][MAX_SIZE], int dimensao) {
     for (int i = 0; i < dimensao; i++) {
         for (int j = 0; j < dimensao; j++) {
@@ -71,11 +71,9 @@ int main() {
     struct Matriz m;
     int adjunta[MAX_SIZE][MAX_SIZE];
 
-    // Leitura da dimensão da matriz
     printf("Digite a dimensao da matriz (2 ou 3): ");
     scanf("%d", &m.dimensao);
 
-    // Leitura dos elementos da matriz
     printf("Digite os elementos da matriz:\n");
     for (int i = 0; i < m.dimensao; i++) {
         for (int j = 0; j < m.dimensao; j++) {
@@ -83,10 +81,8 @@ int main() {
         }
     }
 
-    // Calculando a matriz adjunta
     matrizAdjunta(m, adjunta);
 
-    // Imprimindo a matriz adjunta
     printf("Matriz adjunta:\n");
     imprimirMatriz(adjunta, m.dimensao);
 

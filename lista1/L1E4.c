@@ -3,18 +3,17 @@
 
 #define MAX_LENGTH 20
 
-// Função para ler uma string
+
 void lerString(char *str) {
     printf("Digite uma string (max %d caracteres): ", MAX_LENGTH);
     scanf(" %s", str);
 }
 
-// Função para imprimir o tamanho da string
+
 void imprimirTamanho(char *str) {
     printf("O tamanho da string é: %ld\n", strlen(str));
 }
 
-// Função para comparar duas strings
 void compararStrings(char *str1, char *str2) {
     int cmp = strcmp(str1, str2);
     if (cmp == 0)
@@ -23,13 +22,12 @@ void compararStrings(char *str1, char *str2) {
         printf("As strings são diferentes.\n");
 }
 
-// Função para concatenar duas strings
 void concatenarStrings(char *str1, char *str2) {
     strcat(str1, str2);
     printf("A string concatenada é: %s\n", str1);
 }
 
-// Função para imprimir uma string de forma reversa
+
 void imprimirReverso(char *str) {
     printf("A string de forma reversa é: ");
     for (int i = strlen(str) - 1; i >= 0; i--) {
@@ -59,7 +57,7 @@ void substituirCaractere(char *str, char c1, char c2) {
     printf("String após a substituição: %s\n", str);
 }
 
-// Função para verificar se uma string é uma substring de outra
+
 void verificarSubstring(char *str1, char *str2) {
     if (strstr(str1, str2) != NULL)
         printf("%s é uma substring de %s.\n", str2, str1);
@@ -67,7 +65,6 @@ void verificarSubstring(char *str1, char *str2) {
         printf("%s não é uma substring de %s.\n", str2, str1);
 }
 
-// Função para retornar uma substring de uma string
 void retornarSubstring(char *str, int posicao, int tamanho) {
     if (posicao < 0 || posicao >= strlen(str) || posicao + tamanho > strlen(str)) {
         printf("Posição ou tamanho inválido.\n");

@@ -4,7 +4,6 @@
 int main() {
     int n, i;
 
-    // Pedir ao usuário a dimensão dos vetores
     printf("Digite a dimensao dos vetores: ");
     scanf("%d", &n);
 
@@ -13,13 +12,11 @@ int main() {
     int *v2 = (int *)malloc(n * sizeof(int));
     int *v3 = (int *)malloc(2 * n * sizeof(int));
 
-    // Ler elementos do primeiro vetor
     printf("Digite os elementos do primeiro vetor:\n");
     for (i = 0; i < n; i++) {
         scanf("%d", &v1[i]);
     }
 
-    // Ler elementos do segundo vetor
     printf("Digite os elementos do segundo vetor:\n");
     for (i = 0; i < n; i++) {
         scanf("%d", &v2[i]);
@@ -32,7 +29,6 @@ int main() {
         v3[j++] = v2[i];
     }
 
-    // Imprimir os vetores
     printf("v1: ");
     for (i = 0; i < n; i++) {
         printf("%d ", v1[i]);
