@@ -1,0 +1,10 @@
+C é uma linguagem de programação de propósito geral que foi originalmente desenvolvida por Dennis Ritchie 
+para o sistema operacional Unix na Bell Labs. É uma linguagem de programação procedural que foi projetada 
+para ser simples, eficiente e flexível. C é altamente portável e usado para uma variedade de diferentes 
+sistemas operacionais e arquiteturas de hardware.
+
+A linguagem C fornece controle de baixo nível sobre a memória e permite a manipulação direta de bits, 
+bytes e endereços de memória, o que a torna uma linguagem de escolha para a implementação de sistemas 
+operacionais e compiladores. Além disso, muitas outras linguagens de programação modernas foram 
+influenciadas pela sintaxe e semântica de C, incluindo C++, C#, Objective-C e muitas outras.
+
