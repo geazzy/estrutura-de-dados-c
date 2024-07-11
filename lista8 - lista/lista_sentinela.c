@@ -236,3 +236,106 @@ void lista_imprimir(Lista* l){
     }
     printf("]");
 }
+
+bool inverte(Lista* l){
+    if(!lista_ehValida(l) || l->qtde <= 1) return false;
+
+    No *atual = l->sentinela->prox;
+    No *anterior = l->sentinela;
+    No *proximo = NULL;
+
+    while(atual != l->sentinela){
+        proximo = atual->prox;
+        atual->prox = anterior;
+        anterior->ant = atual;
+        anterior = atual;
+        atual = proximo;
+    }
+
+    l->sentinela->prox = anterior;
+    l->sentinela->prox->ant = l->sentinela;
+
+    return true;
+}
+
+Lista* intercalaListas(Lista* l1, Lista* l2) {
+    if (l1 == NULL || l2 == NULL) {
+        return NULL;
+    }
+
+    Lista* intercalada = lista_criar();
+    if (intercalada == NULL) {
+        return NULL;
+    }
+
+    No *no1 = l1->sentinela->prox;
+    No *no2 = l2->sentinela->prox;
+
+    while (no1 != l1->sentinela && no2 != l2->sentinela) {
+        lista_anexar(intercalada, no1->dado);
+        no1 = no1->prox;
+
+        lista_anexar(intercalada, no2->dado);
+        no2 = no2->prox;
+    }
+
+    while (no1 != l1->sentinela) {
+        lista_anexar(intercalada, no1->dado);
+        no1 = no1->prox;
+    }
+
+    while (no2 != l2->sentinela) {
+        lista_anexar(intercalada, no2->dado);
+        no2 = no2->prox;
+    }
+
+    return intercalada;
+}
+
+// Função para trocar elementos das posições x e y na lista com sentinela
+
+bool troca(Lista *l, int x, int y) {
+    if (!lista_ehValida(l)) {
+        return false;
+    }
+
+    // Convertendo posições negativas
+    int pos_x = converte_posicao(l, x);
+    int pos_y = converte_posicao(l, y);
+
+    // Verificando se as posições são válidas
+    if (!posicao_ehPreenchida(l, pos_x) || !posicao_ehPreenchida(l, pos_y)) {
+        return false;
+    }
+
+    // Encontrando os nós correspondentes às posições x e y
+    No *no_x = devolve_enderecoNo(l, pos_x);
+    No *no_y = devolve_enderecoNo(l, pos_y);
+
+    // Trocando os elementos
+    TipoElemento temp = no_x->dado;
+    no_x->dado = no_y->dado;
+    no_y->dado = temp;
+
+    return true;
+}
+
+bool eh_ordenada(Lista *l) {
+    if (l == NULL || l->sentinela->prox == l->sentinela) return true; // Lista vazia ou com um elemento é considerada ordenada
+
+    No *atual = l->sentinela->prox;
+    bool crescente = true;
+    bool decrescente = true;
+
+    while (atual->prox != l->sentinela) {
+        if (atual->dado > atual->prox->dado) {
+            crescente = false;
+        }
+        if (atual->dado < atual->prox->dado) {
+            decrescente = false;
+        }
+        atual = atual->prox;
+    }
+
+    return crescente || decrescente;
+}

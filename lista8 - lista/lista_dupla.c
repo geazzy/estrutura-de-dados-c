@@ -263,3 +263,122 @@ void lista_imprimir(Lista* l){
     }
     printf("]");
 }
+
+bool inverte(Lista *l) {
+    if (!lista_ehValida(l)) return false;
+    if (l->qtde < 2) return true;
+
+    No *temp = NULL;
+    No *current = l->inicio;
+
+    // Invertendo o ponteiro de próximo e anterior de todos os nós
+    while (current != NULL) {
+        temp = current->ant;
+        current->ant = current->prox;
+        current->prox = temp;
+        current = current->ant;
+    }
+
+    // Ajustando os ponteiros início e fim
+    if (temp != NULL) {
+        l->fim = l->inicio;
+        l->inicio = temp->ant;
+    }
+
+    return true;
+}
+
+Lista* intercalaListas(Lista* l1, Lista* l2) {
+    if (l1 == NULL || l2 == NULL) {
+        return NULL;
+    }
+
+    Lista* intercalada = lista_criar();
+    if (intercalada == NULL) {
+        return NULL;
+    }
+
+    No *no1 = l1->inicio;
+    No *no2 = l2->inicio;
+
+    while (no1 != NULL && no2 != NULL) {
+        TipoElemento elemento1 = no1->dado;
+        TipoElemento elemento2 = no2->dado;
+        
+        lista_anexar(intercalada, elemento1);
+        lista_anexar(intercalada, elemento2);
+        
+        no1 = no1->prox;
+        no2 = no2->prox;
+    }
+
+    // Adicionar os elementos restantes de l1, se houver
+    while (no1 != NULL) {
+        TipoElemento elemento1 = no1->dado;
+        lista_anexar(intercalada, elemento1);
+        no1 = no1->prox;
+    }
+
+    // Adicionar os elementos restantes de l2, se houver
+    while (no2 != NULL) {
+        TipoElemento elemento2 = no2->dado;
+        lista_anexar(intercalada, elemento2);
+        no2 = no2->prox;
+    }
+
+    // Limpar as listas l1 e l2 (opcional)
+    // lista_destruir(&l1);
+    // lista_destruir(&l2);
+
+    return intercalada;
+}
+/// @brief  Troca os elementos das posições x e y da lista
+/// @param l Lista
+/// @param x Indice x 
+/// @param y Indice y
+/// @return lista com os elementos trocados
+bool troca(Lista* l, int x, int y) {
+    if (!lista_ehValida(l)) {
+        return false;
+    }
+
+    // Convertendo posições negativas
+    int pos_x = converte_posicao(l, x);
+    int pos_y = converte_posicao(l, y);
+
+    // Verificando se as posições são válidas
+    if (!posicao_ehPreenchida(l, pos_x) || !posicao_ehPreenchida(l, pos_y)) {
+        return false;
+    }
+
+    // Encontrando os nós correspondentes às posições x e y
+    No *no_x = devolve_enderecoNo(l, pos_x);
+    No *no_y = devolve_enderecoNo(l, pos_y);
+
+    // Trocando os elementos
+    TipoElemento temp = no_x->dado;
+    no_x->dado = no_y->dado;
+    no_y->dado = temp;
+
+    return true;
+}
+
+bool eh_ordenada(Lista *l) {
+    if (l == NULL || l->inicio == NULL) return true; // Lista vazia é considerada ordenada
+
+    No *atual = l->inicio;
+    bool crescente = true;
+    bool decrescente = true;
+
+    while (atual->prox != NULL) {
+        if (atual->dado > atual->prox->dado) {
+            crescente = false;
+        }
+        if (atual->dado < atual->prox->dado) {
+            decrescente = false;
+        }
+        atual = atual->prox;
+    }
+
+    return crescente || decrescente;
+}

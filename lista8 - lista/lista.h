@@ -34,5 +34,9 @@ bool lista_contem(Lista* l, TipoElemento elemento);
 int lista_tamanho(Lista* l);
 bool lista_toString(Lista* l, char* str);
 void lista_imprimir(Lista* l);
+bool inverte(Lista *l);
+Lista* intercalaListas(Lista *l1, Lista *l2);
+bool troca(Lista *l, int x, int y);
+bool eh_ordenada(Lista *l);
 
 #endif
